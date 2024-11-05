@@ -1,0 +1,62 @@
+@{
+    ViewData["Title"] = "Eventos Deportivos";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Eventos</h1>
+</div>
+
+<!-- Button trigger modal -->
+<div class="mb-2">
+    <button type="button" onclick="ListadoEventosDdeportivos()" class="button">
+        Actualizar
+    </button>
+    <button type="button" class="button" onclick="NuevoEventoDeportivo()" data-bs-toggle="modal"
+        data-bs-target="#ModalEvento">
+        Nuevo Lugar
+    </button>
+</div>
+
+<div class="modal fade" id="ModalEvento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalTitulo"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <input type="hidden" id="EventoDeportivoID" value="0" />
+
+                        <label for="Nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="Nombre" style="text-transform:uppercase"
+                            placeholder="Nombre del Evento">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="LimpiarModal()" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="GuardarEventoDeportivo()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor">
+    <table class="table">
+        <thead class="td">
+            <tr class="tr">
+                <th>Nombre</th>
+                <th style="width: 120px;">Editar</th>
+                <th style="width: 120px;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-eventosdeportivos">
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script src="~/js/eventosdeportivos-1.0.0.js"></script>
+}

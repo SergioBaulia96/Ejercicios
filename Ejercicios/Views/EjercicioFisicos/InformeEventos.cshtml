@@ -1,0 +1,49 @@
+@{
+  ViewData["Title"] = "Ejercicio Fisicos";
+}
+<style>
+    body{
+        margin-top: 250px;
+    }
+</style>
+<div class="text-center">
+  <h1 class="display-4">Informe eventos</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="BuscarInicioEvento" class="form-label text-light">Inicio de la evento</label>
+        <input type="datetime-local" id="BuscarInicioEvento" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label for="BuscarFinEvento" class="form-label text-light">Fin de la evento</label>
+        <input type="datetime-local" id="BuscarFinEvento" class="form-control" />
+    </div>
+</div>
+<div class="mt-2 p-1">
+    <button type="button" class="btn btn-primary" onclick="ListadosInformeEventos()">
+        Buscar
+    </button>
+</div>
+
+<div class="contenedor">
+<table class="table">
+  <thead class="td">
+    <tr class="tr">
+        <th>EVENTOS</th>
+        <th>LUGARES</th>
+        <th>Tipo Ejercicio</th>
+        <th>INICIO</th>
+        <th>FIN</th>
+        <th>Duracion</th>
+        <th>AL INICIAR:</th>
+        <th>AL FINALIZAR:</th>
+        <th>OBSERVACIONES</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-infomeEventos"></tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/informeEventos.js"></script>
+}

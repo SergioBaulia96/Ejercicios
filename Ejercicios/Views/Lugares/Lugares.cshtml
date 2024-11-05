@@ -1,0 +1,63 @@
+@{
+    ViewData["Title"] = "Tipo de Lugares";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Tipos de Lugares</h1>
+</div>
+
+<!-- Button trigger modal -->
+<div class="mb-2">
+    <button type="button" onclick="ListadoLugares()" class="button">
+        Actualizar
+    </button>
+    <button type="button" class="button" onclick="NuevoRegistro()" data-bs-toggle="modal"
+        data-bs-target="#ModalLugar">
+        Nuevo Lugar
+    </button>
+</div>
+
+<input type="text" value="@ViewBag.PersonaID" id="PersonaID">
+<!-- Modal -->
+<div class="modal fade" id="ModalLugar" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="ModalTitulo"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="mb-3">
+                        <input type="hidden" id="LugarID" value="0" />
+                        <label for="nombre" class="form-label">Nombre</label>
+                        <input type="text" class="form-control" id="nombre" style="text-transform:uppercase"
+                            placeholder="Nombre del Lugar">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="LimpiarModal()" class="btn btn-secondary"
+                    data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" onclick="GuardarRegistro()" class="btn btn-primary">Guardar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="contenedor">
+    <table class="table">
+        <thead class="td">
+            <tr class="tr">
+                <th>Nombre</th>
+                <th style="width: 120px;">Editar</th>
+                <th style="width: 120px;">Eliminar</th>
+            </tr>
+        </thead>
+        <tbody id="tbody-lugares">
+        </tbody>
+    </table>
+</div>
+@section Scripts {
+    <script src="~/js/lugares-1.0.0.js"></script>
+}

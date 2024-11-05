@@ -1,0 +1,46 @@
+
+
+<div class="text-center" style="margin-top: 300px;">
+  <h1 class="display-4">Informe 3 niveles</h1>
+</div>
+
+<div class="row">
+    <div class="col-md-3">
+        <label for="BuscarInicio" class="form-label text-light">Inicio de la actividad</label>
+        <input type="datetime-local" id="BuscarInicio" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label for="BuscarFin" class="form-label text-light">Fin de la actividad</label>
+        <input type="datetime-local" id="BuscarFin" class="form-control" />
+    </div>
+    <div class="col-md-3">
+        <label for="TipoEjercicioBuscar" class="form-label">Buscar Ejercicio</label>
+              @Html.DropDownList("TipoEjercicioBuscar", null, htmlAttributes: new { @class = "form-control" })
+    </div>
+</div>
+<div class="mt-2 p-1">
+    <button type="button" class="btn btn-primary" onclick="ListadoInforme()">
+        Buscar
+    </button>
+</div>
+
+<div class="contenedor">
+<table class="table">
+  <thead class="td">
+    <tr class="tr">
+        <th>Tipo Ejercicio</th>
+        <th>LUGARES</th>
+        <th>INICIO</th>
+        <th>FIN</th>
+        <th>Duracion</th>
+        <th>AL INICIAR:</th>
+        <th>AL FINALIZAR:</th>
+        <th>OBSERVACIONES</th>
+      </tr>
+    </thead>
+    <tbody id="tbody-ejerciciosportipo"></tbody>
+</table>
+
+@section Scripts {
+    <script src="~/js/informe.js"></script>
+}

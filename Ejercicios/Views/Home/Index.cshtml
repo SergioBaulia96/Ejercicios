@@ -1,0 +1,13 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<input type="text" value="@ViewBag.PersonaID" id="PersonaID">
+
+<div class="row">
+    <div class="conteiner">
+        <h1 class="bievenida">Bienvenidos</h1>
+        <a class="boton" asp-area="Identity" asp-page="/Account/Login">Iniciar Sesión</a>
+        <a class="boton" asp-area="Identity" asp-page="/Account/Register">Registrarse</a>
+    </div>
+</div>
