@@ -54,9 +54,7 @@ public class LugaresController : Controller
             
             if (lugarID == 0)
             {
-                var existeLugar = _context.Lugares.Where(t => t.Nombre == nombre).Count();
-                if (existeLugar == 0)
-                {
+                
                     //4- GUARDAR EL TIPO DE EJERCICIO
                     var lugar = new Lugar
                     {
@@ -65,11 +63,7 @@ public class LugaresController : Controller
                     };
                     _context.Add(lugar);
                     _context.SaveChanges();
-                }
-                else
-                {
-                    resultado = "YA EXISTE UN REGISTRO EL MISMO NOMBRE";
-                }
+                
             }
             else
             {

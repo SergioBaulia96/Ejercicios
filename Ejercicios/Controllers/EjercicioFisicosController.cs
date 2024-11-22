@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace Ejercicios.Controllers;
 [Authorize]
@@ -48,7 +49,7 @@ public class EjercicioFisicosController : Controller
         tipoEjercicios.Add(new TipoEjercicio { TipoEjercicioID = 0, Descripcion = "[SELECCIONE...]" });
         ViewBag.TipoEjercicioID = new SelectList(tipoEjercicios.OrderBy(c => c.Descripcion), "TipoEjercicioID", "Descripcion");
 
-        var lugares = _context.Lugares.ToList();
+        var lugares = _context.Lugares.Where(p => p.PersonaID == PersonaID).ToList();
         lugares.Add(new Lugar { LugarID = 0, Nombre = "[SELECCIONE...]" });
         ViewBag.LugarID = new SelectList(lugares.OrderBy(c => c.Nombre), "LugarID", "Nombre");
 
@@ -58,7 +59,7 @@ public class EjercicioFisicosController : Controller
 
         return View();
     }
-    public JsonResult ListadoEjerciciosFisicos(int? id)
+    public JsonResult ListadoEjerciciosFisicos(int? id, int? personaID)
     {
         List<VistaEjercicioFisico> ejerciciosFisicosMostrar = new List<VistaEjercicioFisico>();
 
@@ -69,15 +70,24 @@ public class EjercicioFisicosController : Controller
             ejerciciosFisicos = ejerciciosFisicos.Where(t => t.EjercicioFisicoID == id).ToList();
         }
 
+        if (personaID != null)
+        {
+            ejerciciosFisicos = ejerciciosFisicos.Where(t => t.PersonaID == personaID).ToList();
+        }
+
         var tiposEjercicios = _context.TipoEjercicios.ToList();
         var lugares = _context.Lugares.ToList();
         var eventosDeportivos = _context.EventosDeportivos.ToList();
+        var personas = _context.Personas.ToList();
 
         foreach (var ejercicioFisicos in ejerciciosFisicos)
         {
             var tipoEjercicio = tiposEjercicios.Where(t => t.TipoEjercicioID == ejercicioFisicos.TipoEjercicioID).Single();
             var lugar = lugares.Where(t => t.LugarID == ejercicioFisicos.LugarID).Single();
             var eventoDeportivo = eventosDeportivos.Where(t => t.EventoDeportivoID == ejercicioFisicos.EventoDeportivoID).Single();
+            var persona = personas.Where(t => t.PersonaID == ejercicioFisicos.PersonaID).Single();
+            var clQuemadas = tipoEjercicio.Met * persona.Peso * (decimal)ejercicioFisicos.IntervaloEjercicio.TotalHours;
+
 
             var ejercicioFisicosMostrar = new VistaEjercicioFisico
             {
@@ -92,7 +102,9 @@ public class EjercicioFisicosController : Controller
                 FinString = ejercicioFisicos.Fin.ToString("dd/MM/yyyy HH:mm"),
                 EstadoEmocionalInicio = Enum.GetName(typeof(EstadoEmocional), ejercicioFisicos.EstadoEmocionalInicio),
                 EstadoEmocionalFin = Enum.GetName(typeof(EstadoEmocional), ejercicioFisicos.EstadoEmocionalFin),
-                Observaciones = ejercicioFisicos.Observaciones
+                Observaciones = ejercicioFisicos.Observaciones,
+                PersonaPeso = persona.Peso,
+                ClQuemadas = tipoEjercicio.Met * persona.Peso * Convert.ToDecimal(ejercicioFisicos.IntervaloEjercicio.TotalHours),
             };
             ejerciciosFisicosMostrar.Add(ejercicioFisicosMostrar);
         }
@@ -377,5 +389,4 @@ public class EjercicioFisicosController : Controller
 
 
 }
-
 

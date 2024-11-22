@@ -22,3 +22,18 @@ public enum Genero
     Femenino,
     Otro
 }
+
+public class VistaCuenta
+{
+    public int PersonaID { get; set; }
+    public string? NombreCompleto { get; set; }
+    public string? FechaNacimiento { get; set; }
+    public string? Genero { get; set; }
+    public decimal Peso { get; set; }
+    public decimal Altura { get; set; }
+    public string? Edad { get; set; }
+    public string? Imc { get; set; }
+    public string? Tmb { get; set; }
+    public string? EmailPersona { get; set; }
+    public string? Rol { get; set; }
+}

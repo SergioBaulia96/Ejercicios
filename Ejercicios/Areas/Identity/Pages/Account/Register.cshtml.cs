@@ -21,6 +21,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace Ejercicios.Areas.Identity.Pages.Account
 {
@@ -30,6 +31,7 @@ namespace Ejercicios.Areas.Identity.Pages.Account
         private readonly UserManager<IdentityUser> _userManager;
         private readonly IUserStore<IdentityUser> _userStore;
         private readonly IUserEmailStore<IdentityUser> _emailStore;
+        private readonly RoleManager<IdentityRole> _rolManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
         private readonly ApplicationDbContext _context;
@@ -40,7 +42,8 @@ namespace Ejercicios.Areas.Identity.Pages.Account
             SignInManager<IdentityUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
-            ApplicationDbContext _contexto
+            ApplicationDbContext _contexto,
+            RoleManager<IdentityRole> rolManager
             )
         {
             _userManager = userManager;
@@ -50,6 +53,7 @@ namespace Ejercicios.Areas.Identity.Pages.Account
             _logger = logger;
             _emailSender = emailSender;
             _context = _contexto;
+            _rolManager = rolManager;
         }
 
         /// <summary>
@@ -151,6 +155,21 @@ namespace Ejercicios.Areas.Identity.Pages.Account
         {
             ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
+
+            var selectListItems = new List<SelectListItem>
+            {
+                new SelectListItem { Value = "0", Text = "" }
+            };
+
+            var generos = Enum.GetValues(typeof(Genero)).Cast<Genero>();
+
+            selectListItems.AddRange(generos.Select(e => new SelectListItem
+            {
+                Value = ((int)e).ToString(), 
+                Text = e.ToString()
+            }));
+
+            ViewData["Generos"] = selectListItems; 
         }
 
         public async Task<IActionResult> OnPostAsync(string returnUrl = null)
@@ -161,9 +180,17 @@ namespace Ejercicios.Areas.Identity.Pages.Account
             {
                 var user = CreateUser();
 
+                var nombreRolCrearExiste = await _rolManager.FindByNameAsync("DEPORTISTA");
+
+                if (nombreRolCrearExiste == null)
+                {
+                    var roleResult = await _rolManager.CreateAsync(new IdentityRole("DEPORTISTA"));
+                }
+
                 await _userStore.SetUserNameAsync(user, Input.Email, CancellationToken.None);
                 await _emailStore.SetEmailAsync(user, Input.Email, CancellationToken.None);
                 var result = await _userManager.CreateAsync(user, Input.Password);
+                await _userManager.AddToRoleAsync(user, "DEPORTISTA");
 
                 if (result.Succeeded)
                 {
@@ -175,10 +202,10 @@ namespace Ejercicios.Areas.Identity.Pages.Account
                     {
                         UsuarioID = userId,
                         NombreCompleto = Input.NombreCompleto,
-                        FechaNacimiento = DateOnly.FromDateTime(DateTime.Now),
-                        Genero = 0,
-                        Peso = 0,
-                        Altura = 0,
+                        FechaNacimiento = Input.FechaNacimiento,
+                        Genero = Input.Genero,
+                        Peso = Input.Peso,
+                        Altura = Input.Altura,
                     };
                     _context.Personas.Add(Persona);
                     await _context.SaveChangesAsync();

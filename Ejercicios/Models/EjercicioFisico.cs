@@ -35,6 +35,7 @@ namespace Ejercicios.Models
         public int EjercicioFisicoID {get; set; }
         public int TipoEjercicioID { get; set; }
         public int LugarID { get; set; }
+        public int PersonaID { get; set; }
         public int EventoDeportivoID { get; set; }
         public string? NombreEvento { get; set; }
         public string? Descripcion { get; set; }
@@ -45,6 +46,9 @@ namespace Ejercicios.Models
         public string? EstadoEmocionalInicio {get; set; }
         public string? EstadoEmocionalFin {get; set; }
         public string? Observaciones {get; set; }
+        public decimal PersonaPeso { get; set; }
+        public string? MetEjercicio { get; set; }
+        public decimal ClQuemadas { get; set; }
     }
 
     public enum EstadoEmocional{

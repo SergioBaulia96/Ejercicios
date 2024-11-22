@@ -1,0 +1,76 @@
+@{
+    ViewData["Title"] = "Cuentas";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Deportistas</h1>
+</div>
+
+<button type="button" class="btn btn-dark mb-3" title="Imprimir Informe" onclick="ImprimirTablaUsuarios()">
+    <i class="fa fa-print"></i>Imprimir
+</button>
+
+
+
+<div class="contenedor">
+    <table class="table" id="imprimir-tabla">
+        <thead class="td">
+            <tr class="tr">
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>Nombre</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>Correo</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>Fecha de Nacimiento</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>Genero</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle" ;">
+                    <div class="centrar">
+                        <p>Peso</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>Altura</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>IMC</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>TMB</p>
+                    </div>
+                </th>
+                <th class="text-center align-middle">
+                    <div class="centrar">
+                        <p>Rol</p>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody id="tbody-administradores">
+        </tbody>
+    </table>
+</div>
+
+
+@section Scripts {
+    <script src="~/js/administradores-1.0.0.js"></script>
+    <script src="~/js/impresiones.js"></script>
+}
+

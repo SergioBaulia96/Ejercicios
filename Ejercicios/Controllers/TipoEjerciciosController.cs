@@ -38,7 +38,7 @@ public class TipoEjerciciosController : Controller
         return Json(tipoDeEjercicios);
     }
 
-    public JsonResult GuardarTipoEjercicio(int tipoEjercicioID, string descripcion)
+    public JsonResult GuardarTipoEjercicio(int tipoEjercicioID, string descripcion, decimal met)
     {
         //1- VERIFICAMOS SI REALMENTE INGRESO ALGUN CARACTER Y LA VARIABLE NO SEA NULL
         // if (descripcion != null && descripcion != "")
@@ -70,7 +70,8 @@ public class TipoEjerciciosController : Controller
                     //4- GUARDAR EL TIPO DE EJERCICIO
                     var tipoEjercicio = new TipoEjercicio
                     {
-                        Descripcion = descripcion
+                        Descripcion = descripcion,
+                        Met = met
                     };
                     _context.Add(tipoEjercicio);
                     _context.SaveChanges();
@@ -92,6 +93,7 @@ public class TipoEjerciciosController : Controller
                     {
                         //QUIERE DECIR QUE EL ELEMENTO EXISTE Y ES CORRECTO ENTONCES CONTINUAMOS CON EL EDITAR
                         tipoEjercicioEditar.Descripcion = descripcion;
+                        tipoEjercicioEditar.Met = met;
                         _context.SaveChanges();
                     }
                     else

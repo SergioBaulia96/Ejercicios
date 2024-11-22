@@ -28,6 +28,7 @@ function ListadoEjerciciosFisicos(){
                     <td>${ejercicioFisicoMostrar.estadoEmocionalInicio}</td>
                     <td>${ejercicioFisicoMostrar.estadoEmocionalFin}</td>
                     <td>${ejercicioFisicoMostrar.observaciones}</td>
+                    <td>${ejercicioFisicoMostrar.clQuemadas}</td>
                     <td class="text-center">
                     <button type="button" class="btn btn-success" onclick="AbrirEditarEjercicioFisico(${ejercicioFisicoMostrar.ejercicioFisicoID})">
                     Editar

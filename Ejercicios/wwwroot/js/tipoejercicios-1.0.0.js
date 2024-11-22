@@ -26,6 +26,7 @@ function ListadoTipoEjercicios(){
                 contenidoTabla += `
                 <tr>
                     <td>${tipoDeEjercicio.descripcion}</td>
+                    <td>${tipoDeEjercicio.met}</td>
                     <td class="text-center">
                     <button type="button" class="btn btn-success" onclick="AbrirModalEditar(${tipoDeEjercicio.tipoEjercicioID})">
                     Editar
@@ -56,6 +57,7 @@ function ListadoTipoEjercicios(){
 function LimpiarModal(){
     document.getElementById("TipoEjercicioID").value = 0;
     document.getElementById("descripcion").value = "";
+    document.getElementById("Met").value = "";
 }
 
 function NuevoRegistro(){
@@ -82,6 +84,7 @@ function AbrirModalEditar(tipoEjercicioID){
             document.getElementById("TipoEjercicioID").value = tipoEjercicioID;
             $("#ModalTitulo").text("Editar Tipo de Ejercicio");
             document.getElementById("descripcion").value = tipoDeEjercicio.descripcion;
+            document.getElementById("Met").value = tipoDeEjercicio.met;
             $("#ModalTipoEjercicio").modal("show");
         },
 
@@ -97,10 +100,11 @@ function AbrirModalEditar(tipoEjercicioID){
 function GuardarRegistro() {
     let tipoEjercicioID = document.getElementById("TipoEjercicioID").value;
     let descripcion = document.getElementById("descripcion").value;
+    let met = document.getElementById("Met").value
 
             $.ajax({
                 url: '../../TipoEjercicios/GuardarTipoEjercicio',
-                data: { tipoEjercicioID: tipoEjercicioID, descripcion: descripcion},
+                data: { tipoEjercicioID: tipoEjercicioID, descripcion: descripcion, met: met},
                 type: 'POST',
                 dataType: 'json',
                 success: function (resultado) {

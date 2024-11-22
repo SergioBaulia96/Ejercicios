@@ -4,75 +4,60 @@
     font-family: 'Poppins', sans-serif;
 }
 
-#register {
+
+ /* Contenedor centrado y con fondo transparente */
+ .form-register-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
-    height: 60vh;
+    min-height: 100vh;
     margin-top: 100px;
-    background-size: cover;
-    background-position: center;
+    background-color: rgba(0, 0, 0, 0.05); /* Fondo general ligero */
 }
 
-.register-box {
-    position: relative;
-    width: 400px;
-    height: 500px;
-    background:transparent;
-    border: 2px solid rgba(255, 255, 255, 5);
-    border-radius: 20px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    backdrop-filter: blur(15px);
+.form-register {
+    width: 100%;
+    max-width: 500px;
+    padding: 2rem;
+    background-color: rgba(255, 255, 255, 0.1); /* Fondo semi-transparente */
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-h2 {
-    font-size: 2.5em;
-    color: #fff;
-    text-align: center;
-}
-
+/* Estilos para los inputs y labels */
 .input-register {
     position: relative;
-    width: 310px;
-    margin: 30px 0;
-    border-bottom: 2px solid #fff;
+    margin-bottom: 1.5rem;
 }
-
-
 
 .input-register label {
     position: absolute;
-    top: -5px;
+    top: 10px;
     left: 10px;
-    bottom: 10px;
-    transform: translateY(-50%);
-    font-size: 1em;
-    color: #fff;
+    font-size: 0.9rem;
+    color: #6c757d;
     pointer-events: none;
+    transition: 0.2s;
 }
 
-.input-register input {
-    width: 100%;
-    height: 50px;
-    background: transparent;
-    border: none;
-    outline: none;
-    font-size: 1em;
+.input-register input:focus ~ label,
+.input-register input:not(:placeholder-shown) ~ label {
+    top: -8px;
+    left: 8px;
+    font-size: 0.75rem;
+    color: #495057;
+}
+
+/* Botón de registro estilizado */
+.buttonreg {
+    background-color: #007bff;
     color: #fff;
+    border: none;
+    padding: 0.5rem 1.5rem;
+    border-radius: 5px;
+    transition: background-color 0.3s;
 }
 
-#registerSubmit {
-    width: 100%;
-    height: 40px;
-    background-color: #fff;
-    border: none;
-    outline: none;
-    border-radius: 40px;
-    cursor: pointer;
-    font-size: 1em;
-    color: #000;
-    font-weight: 500;
+.buttonreg:hover {
+    background-color: #0056b3;
 }
